@@ -1,6 +1,8 @@
 package org.springframework.samples.hadoop.hbase;
 
 import org.apache.hadoop.hbase.filter.ByteArrayComparable;
+import org.apache.hadoop.hbase.protobuf.generated.ComparatorProtos;
+import org.apache.hadoop.hbase.util.ByteStringer;
 
 public class LikeComparator extends ByteArrayComparable {
 
@@ -17,13 +19,20 @@ public class LikeComparator extends ByteArrayComparable {
 	@Override
 	public byte[] toByteArray() {
 		System.err.println("toByteArray LikeComparator toByteArray " + this);
-		return valb;
+		ComparatorProtos.BinaryComparator.Builder builder = ComparatorProtos.BinaryComparator.newBuilder();
+		builder.setComparable(convert1());
+		return builder.build().toByteArray();
+
 	}
+
+	ComparatorProtos.ByteArrayComparable convert1() {
+		ComparatorProtos.ByteArrayComparable.Builder builder = ComparatorProtos.ByteArrayComparable.newBuilder();
+		if (valb != null)
+			builder.setValue(ByteStringer.wrap(valb));
+		return builder.build();
+	}
+
 	
-	public static ByteArrayComparable parseFrom(byte[] pbBytes){
-		System.err.println("parseFrom LikeComparator toByteArray " + new String(pbBytes));
-		return new LikeComparator(pbBytes);
-	}
 
 	@Override
 	public int compareTo(byte[] value, int offset, int length) {

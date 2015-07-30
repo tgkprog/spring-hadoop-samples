@@ -43,9 +43,10 @@ public class UserRepository {
 
 	public List<User> findEmailLike(String s) {
 
-		ByteArrayComparable comparer = new LikeComparator(s.getBytes());
-
-		org.apache.hadoop.hbase.filter.Filter filt = new SingleColumnValueFilter(CF_INFO, qEmail, CompareOp.EQUAL, comparer);
+		//ByteArrayComparable comparer = new LikeComparator(s.getBytes());
+		//new SingleColumnValueFilter(CF_INFO, qEmail, CompareOp.EQUAL, comparer);
+		org.apache.hadoop.hbase.filter.Filter filt = new SingleColumnValueFilter(CF_INFO, qEmail, CompareOp.EQUAL, s.getBytes());
+		//SingleColumnValueFilter filt2 = new SingleColumnValueFilter();
 		org.apache.hadoop.hbase.client.Scan scan = new Scan();
 		scan.setFilter(filt);
 		scan.addFamily(CF_INFO);

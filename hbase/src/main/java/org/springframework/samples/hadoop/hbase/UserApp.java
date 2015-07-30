@@ -28,7 +28,7 @@ public class UserApp {
 
 	public static void main(String[] args) throws Exception {
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/spring/application-context.xml", UserApp.class);
-		log.info("4 HBase Application Running");
+		log.info("5 HBase Application Running");
 		context.registerShutdownHook();
 
 		UserUtils userUtils = context.getBean(UserUtils.class);
@@ -38,12 +38,12 @@ public class UserApp {
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		List<User> users = userRepository.findAll();
 
-		System.out.println(" Number of users = " + users.size());
+		System.out.println("7 Number of users = " + users.size());
 		System.out.println(users + "\n\n");
 		System.out.println("end all. " );
 		
-		users = userRepository.findEmailLike("r1");
-		System.out.println("Number of like users = " + users.size());
+		users = userRepository.findEmailLike("user0@yahoo.com");
+		System.out.println("Number of eml users = " + users.size());
 		System.out.println(users + "\n\n");
 
 	}
