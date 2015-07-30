@@ -36,7 +36,7 @@ public class UserUtils implements InitializingBean {
 	private HBaseAdmin admin;
 
 	public void initialize() throws IOException {
-
+		System.out.printf("Checking %s\n", tableName);
 		if (admin.tableExists(tableNameAsBytes)) {
 			if (!admin.isTableDisabled(tableNameAsBytes)) {
 				System.out.printf("Disabling %s\n", tableName);

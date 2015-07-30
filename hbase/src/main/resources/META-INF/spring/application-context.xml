@@ -13,7 +13,7 @@
 	<context:component-scan base-package="org.springframework.samples.hadoop.hbase"/>
 	
 	<hdp:configuration id="hadoopConfiguration">
-	  fs.defaultFS=hdfs://localhost:8020
+	  fs.defaultFS=hdfs://10.16.1.125:8020
 	</hdp:configuration>
 	
 	<hdp:hbase-configuration configuration-ref="hadoopConfiguration" zk-quorum="${hbase.zk.host}" zk-port="${hbase.zk.port}"/>
